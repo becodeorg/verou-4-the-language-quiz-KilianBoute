@@ -1,7 +1,7 @@
 <?php
 
 // Require the correct variable type to be used (no auto-converting)
-declare(strict_types = 1);
+declare(strict_types=1);
 
 // Show errors so we get helpful information
 ini_set('display_errors', '1');
@@ -19,5 +19,6 @@ require_once 'classes/Word.php';
 // The LanguageGame class will be your starting point
 $game = new LanguageGame();
 $game->run();
+
 
 require 'view.php';
