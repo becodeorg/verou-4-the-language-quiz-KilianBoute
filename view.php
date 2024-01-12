@@ -10,15 +10,15 @@
 
 <body>
 	<h1>Language game</h1>
-
-	<p>Word: <?= $currentWord ?> </p>
+	<p>Word: <?= $currentWord->getEnglishTranslation() ?> </p>
 	<form method="POST">
 		<label for="answer">Answer: </label>
-		<input type="text" id="anwser" name="answer">
+		<input type="text" id="answer" name="answer">
 		<input type="submit" value="Submit">
 	</form>
-
-	<?= $_SESSION['message'] ?>
+	<?= !empty($_SESSION['message']) ? $_SESSION['message'] : "" ?>
+	<p>Player: <?= $player->getName() ?></p>
+	<p>Score: <?= $player->getScore() ?></p>
 </body>
 
 </html>

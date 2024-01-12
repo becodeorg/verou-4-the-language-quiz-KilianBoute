@@ -4,6 +4,7 @@ class LanguageGame
 {
     private array $words;
     private Word $currentWord;
+    private Player $player;
 
     public function __construct()
     {
@@ -28,6 +29,11 @@ class LanguageGame
         session_start();
         // Option A: user visits site first time (or wants a new word)
         // TODO: select a random word for the user to translate
+        if (empty($this->player)) {
+            $this->player = new Player('player1');
+            $_SESSION['player'] = $this->player;
+        }
+
         if (empty($_SESSION["currentWord"]) || $_SERVER['REQUEST_METHOD'] !== 'POST') {
             $this->currentWord = $this->getRandomWord();
             $_SESSION['currentWord'] = $this->currentWord;
@@ -42,8 +48,10 @@ class LanguageGame
                 $_SESSION['message'] = 'Correct';
                 $this->currentWord = $this->getRandomWord();
                 $_SESSION['currentWord'] = $this->currentWord;
+                $this->player->increaseScore();
             } else {
                 $_SESSION['message'] = 'Nope';
+                $this->player->decreaseScore();
             }
         }
         // TODO: verify the answer (use the verify function in the word class) - you'll need to get the used word from the array first
