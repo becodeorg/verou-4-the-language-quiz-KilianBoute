@@ -11,12 +11,14 @@
 <body>
 	<h1>Language game</h1>
 
-	<p>Word: </p>
+	<p>Word: <?= $currentWord ?> </p>
 	<form method="POST">
 		<label for="answer">Answer: </label>
 		<input type="text" id="anwser" name="answer">
+		<input type="submit" value="Submit">
 	</form>
-	<input type="submit" value="Submit">
+
+	<?= $_SESSION['message'] ?>
 </body>
 
 </html>

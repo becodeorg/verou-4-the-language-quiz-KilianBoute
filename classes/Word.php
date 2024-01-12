@@ -20,4 +20,14 @@ class Word
 
         return $answer === $this->frenchTranslation;
     }
+
+    public function getEnglishTranslation()
+    {
+        return $this->englishTranslation;
+    }
+
+    public function getFrenchTranslation()
+    {
+        return $this->frenchTranslation;
+    }
 }

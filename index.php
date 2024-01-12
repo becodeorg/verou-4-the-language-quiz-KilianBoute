@@ -20,5 +20,6 @@ require_once 'classes/Word.php';
 $game = new LanguageGame();
 $game->run();
 
+$currentWord = $_SESSION["currentWord"]->getEnglishTranslation();
 
 require 'view.php';
