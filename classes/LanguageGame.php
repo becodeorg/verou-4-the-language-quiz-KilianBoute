@@ -31,6 +31,7 @@ class LanguageGame
         if (empty($_SESSION["currentWord"]) || $_SERVER['REQUEST_METHOD'] !== 'POST') {
             $this->currentWord = $this->getRandomWord();
             $_SESSION['currentWord'] = $this->currentWord;
+            unset($_SESSION['message']);
         }
         // Option B: user has just submitted an answer
         else {
@@ -39,6 +40,8 @@ class LanguageGame
             $isCorrect = $this->currentWord->verify($answer);
             if ($isCorrect) {
                 $_SESSION['message'] = 'Correct';
+                $this->currentWord = $this->getRandomWord();
+                $_SESSION['currentWord'] = $this->currentWord;
             } else {
                 $_SESSION['message'] = 'Nope';
             }
