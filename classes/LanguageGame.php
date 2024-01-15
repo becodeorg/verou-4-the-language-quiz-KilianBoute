@@ -5,10 +5,12 @@ class LanguageGame
     private array $words;
     private Word $currentWord;
     private Player $player;
+    private bool $isGameOver;
 
     public function __construct()
     {
         $this->words = [];
+        $this->isGameOver = false;
         // :: is used for static functions
         // They can be called without an instance of that class being created
         // and are used mostly for more *static* types of data (a fixed set of translations in this case)
@@ -47,6 +49,8 @@ class LanguageGame
         } else {
             if (!empty($_POST['reset'])) {
                 $this->player->resetScore();
+                $this->isGameOver = false;
+                $_SESSION['gameOver'] = $this->isGameOver;
                 $_SESSION['message'] = "Reset";
             } else {
                 // Option B: user has just submitted an answer
@@ -62,6 +66,11 @@ class LanguageGame
                 }
             }
             // Update the word after handling the answer
+            if ($this->player->getScoreCorrect() === 10 || $this->player->getScoreWrong() === 10) {
+                $_SESSION['message'] = 'Game Over';
+                $this->isGameOver = true;
+                $_SESSION['gameOver'] = $this->isGameOver;
+            }
             $this->updateWord();
             $_SESSION['player'] = $this->player;
         }
